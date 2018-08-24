@@ -1,5 +1,7 @@
 package _01_IntroToArrayLists;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -8,7 +10,7 @@ import javax.swing.JPanel;
 
 //Copyright The League of Amazing Programmers, 2015
 
-public class _06_IPodShuffle {
+public class _06_IPodShuffle implements ActionListener {
 	JFrame frame = new JFrame();
 	JPanel panel = new JPanel();
 	JButton button = new JButton();
@@ -21,7 +23,9 @@ public class _06_IPodShuffle {
 		frame.setVisible(true);
 		button.setText("Suprise Me!");
 		frame.pack();
-
+		Song song1 = new Song("demo.mp3");
+		;
+		songs.add(song1);
 		/**
 		 * 2. Congratulations on completing the sound check! * Now we want to make an
 		 * iPod Shuffle that plays random music. * Create an ArrayList of Songs and a
@@ -35,6 +39,15 @@ public class _06_IPodShuffle {
 		new _06_IPodShuffle();
 		// Song song = new Song("demo.mp3");
 		// song.play();
+
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		JButton buttonPressed = (JButton) e.getSource();
+		if (buttonPressed == button) {
+
+		}
 
 	}
 
