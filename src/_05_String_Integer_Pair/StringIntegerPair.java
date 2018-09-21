@@ -17,26 +17,38 @@ private String [] keys;
 		//   the passed in String, set the value at that location to the
 		//   passed in value and return from the method.
 		for (int i = 0; i < keys.length; i++) {
-			if(keys.equals(key)) {
-				
+			if(keys[i].equals(key)) {
+			values[i] = value;	
+			return;
 			}
 		}
 		//B. create a String array that is one element longer than the keys
-		
+		String [] strings = new String[keys.length +1];
 		//C. create an integer array that is one element longer than values
-		
+		int [] ints = new int[values.length + 1];
 		//D. set the last element of the new String array to the passed in key
-		
+		strings[strings.length] = key;
 		//E. set the last element of the new int array to the passed in value
-		
+		ints [ints.length] = value;
 		//F. iterate through the keys and values and copy the elements to the new arrays
+		for (int i = 0; i < keys.length; i++) {
+			strings[i] = keys[i];
+		}
 		
+		for (int i = 0; i < values.length; i++) {
+			ints[i] = values[i];
+		}
 		//G. Set the keys and values arrays equal to the new arrays created in steps B and C.
+		keys = strings;
+		values = ints;
 	}
 	
 	//5. Complete the method so it returns the value located at the passed in key.
 	//   If the key does not exist, return Integer.MIN_VALUE.
 	public int get(String key) {
+		for (int i = 0; i < keys.length; i++) {
+			
+		}
 		return 0;
 	}
 	

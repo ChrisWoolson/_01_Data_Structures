@@ -15,9 +15,14 @@ public class HangMan implements KeyListener {
 	JFrame frame = new JFrame();
 	JPanel panel = new JPanel();
 	JLabel label = new JLabel();
+	JLabel labelL = new JLabel();
 	String word;
 	String typed;
-	int lives = 10;
+	int lives = 15;
+	String popped;
+	
+	
+	String text;
 	Stack <String> words = new Stack <String>();
 	public static void main(String[] args) {
 		HangMan game = new HangMan();
@@ -28,10 +33,11 @@ public class HangMan implements KeyListener {
 		
 		wordCountS = JOptionPane.showInputDialog("How many words would you like to guess?");
 		WordCount = Integer.parseInt(wordCountS);
-		if (WordCount >= 267 && WordCount <= 1) {
+		if (WordCount > 267 || WordCount < 1) {
 			JOptionPane.showMessageDialog(null, "Please enter a number within 1 and 267");
 			wordCountS = JOptionPane.showInputDialog("How many words would you like to guess?");
 			WordCount = Integer.parseInt(wordCountS);
+		
 		}
 setup();
 frame.addKeyListener(this);
@@ -51,9 +57,29 @@ frame.addKeyListener(this);
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
-		
-		
+		int lvs = 0;
+		String newString = "";
+		for (int i = 0; i < popped.length(); i++) {
+			if(e.getKeyChar()== popped.charAt(i)) {
+				newString += e.getKeyChar();
+				System.out.println("got it right");
+				
+			}
+			else {
+				newString += text.charAt(i);
+		System.out.println("wrong");
+		lvs++;
+			}
+			
+		}
+		text = newString;
+		label.setText(text);
+		if(!text.contains("_")) {
+			loadLines();
+		}
+		if(lvs == popped.length()) {
+			lives--;
+		}
 		
 		/*
 		System.out.println("keyPressed");
@@ -64,7 +90,16 @@ frame.addKeyListener(this);
 		
 		
 		
-		
+		labelL.setText("Lives Remaining: " + lives);
+		frame.pack();
+		if(lives <=0) {
+			String startNew = JOptionPane.showInputDialog("You lost. Would you like to start a new game?");
+			if(startNew.equals("yes")) {
+				go();
+			}else {
+				System.exit(0);
+			}
+		}
 	}
 
 	@Override
@@ -77,6 +112,10 @@ frame.addKeyListener(this);
 		frame.add(panel);
 		panel.add(label);
 		frame.setVisible(true);
+		panel.add(labelL);
+		labelL.setText("Lives Remaining: " + lives);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		
 	}
 	
@@ -93,12 +132,21 @@ frame.addKeyListener(this);
 	}
 	
 	public void loadLines(){
-		String text = label.getText();
-		String popped =words.pop();
+		lives = 15;
+		if(words.isEmpty()) {
+			label.setText("Good Job");
+			go();
+		}else {
+		
+		text = label.getText();
+		popped =words.pop();
+		text = "";
+		System.out.println(popped);
 		for (int i = 0; i < popped.length() ; i++) {
 			text += "_";
 		}
 		label.setText(text);
-	}
+		frame.pack();
+	}}
 }
 
