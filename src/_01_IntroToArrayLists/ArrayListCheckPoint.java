@@ -5,17 +5,17 @@ import java.util.Random;
 
 public class ArrayListCheckPoint {
 
-	class Cow {
-		public void feed() {}
-		
-		
-	}
+	
 	
 	
 	public static void main(String[] args) {
-		
+		class Cow {
+			public void feed() {
+			}
+
+		}
 		Cow cow;
-		ArrayList <Cow> cows = new ArrayList<Cow>();
+		ArrayList<Cow> cows = new ArrayList<Cow>();
 		
 		Random rand = new Random();
 		int ran = rand.nextInt(2000);
@@ -24,6 +24,11 @@ public class ArrayListCheckPoint {
 			cows.add(new Cow());
 		}
 		
+		for (int i = 0; i < cows.size(); i++) {
+			cows.get(i).feed();
+			System.out.println("Cow fed "+i);
+		}
+		System.out.println(ran);
 	}
 	
 	
